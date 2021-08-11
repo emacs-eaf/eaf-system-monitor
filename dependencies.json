@@ -1,0 +1,11 @@
+{
+    "vue_install": true,
+    "pip": {
+        "linux": [
+            "psutil"
+        ],
+        "win32": [
+            "psutil"
+        ]
+    }
+}
