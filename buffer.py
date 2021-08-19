@@ -34,10 +34,10 @@ class AppBuffer(BrowserBuffer):
 
         self.panel_background_color = QColor(get_emacs_var("eaf-emacs-theme-background-color")).darker(110).name()
 
-        self.buffer_widget.loadFinished.connect(self.load_first_file)
+        self.buffer_widget.loadFinished.connect(self.init_app)
         self.load_index_html(__file__)
 
-    def load_first_file(self):
+    def init_app(self):
         self.buffer_widget.execute_js('''initProcesslistColor(\"{}\", \"{}\")'''.format(
             get_emacs_var("eaf-emacs-theme-background-color"),
             get_emacs_var("eaf-emacs-theme-foreground-color")
