@@ -22,7 +22,7 @@
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import QUrl, QTimer
 from core.webengine import BrowserBuffer
-from core.utils import interactive, get_emacs_var
+from core.utils import interactive
 from functools import cmp_to_key
 import os
 import json
@@ -32,20 +32,14 @@ class AppBuffer(BrowserBuffer):
     def __init__(self, buffer_id, url, arguments):
         BrowserBuffer.__init__(self, buffer_id, url, arguments, False)
 
-        self.panel_background_color = QColor(get_emacs_var("eaf-emacs-theme-background-color")).darker(110).name()
+        self.panel_background_color = QColor(self.theme_background_color).darker(110).name()
 
         self.load_index_html(__file__)
 
     def init_app(self):
-        self.buffer_widget.eval_js('''initProcesslistColor(\"{}\", \"{}\")'''.format(
-            get_emacs_var("eaf-emacs-theme-background-color"),
-            get_emacs_var("eaf-emacs-theme-foreground-color")
-        ))
+        self.buffer_widget.eval_js('''initProcesslistColor(\"{}\", \"{}\")'''.format(self.theme_background_color, self.theme_foreground_color))
 
-        self.buffer_widget.eval_js('''initPanelColor(\"{}\", \"{}\")'''.format(
-            self.panel_background_color,
-            get_emacs_var("eaf-emacs-theme-foreground-color")
-        ))
+        self.buffer_widget.eval_js('''initPanelColor(\"{}\", \"{}\")'''.format(self.panel_background_color, self.theme_foreground_color))
 
         self.update_process_info()
 
