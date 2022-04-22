@@ -37,9 +37,9 @@ class AppBuffer(BrowserBuffer):
         self.load_index_html(__file__)
 
     def init_app(self):
-        self.buffer_widget.eval_js('''initProcesslistColor(\"{}\", \"{}\")'''.format(self.theme_background_color, self.theme_foreground_color))
+        self.buffer_widget.eval_js_function('''initProcesslistColor''', self.theme_background_color, self.theme_foreground_color)
 
-        self.buffer_widget.eval_js('''initPanelColor(\"{}\", \"{}\")'''.format(self.panel_background_color, self.theme_foreground_color))
+        self.buffer_widget.eval_js_function('''initPanelColor''', self.panel_background_color, self.theme_foreground_color)
 
         self.update_process_info()
 
@@ -60,7 +60,7 @@ class AppBuffer(BrowserBuffer):
 
         infos.sort(key=cmp_to_key(self.process_compare), reverse=True)
 
-        self.buffer_widget.eval_js('''updateProcessInfo({});'''.format(json.dumps(infos)))
+        self.buffer_widget.eval_js_function('''updateProcessInfo''', infos)
 
         mem = psutil.virtual_memory()
         cpu_percent = psutil.cpu_percent()
@@ -79,7 +79,7 @@ class AppBuffer(BrowserBuffer):
             }
         }
 
-        self.buffer_widget.eval_js('''updatePanelInfo({});'''.format(json.dumps(panel_info)))
+        self.buffer_widget.eval_js_function('''updatePanelInfo''', panel_info)
 
     def process_compare(self, a, b):
         if a["cpu_percent"] < b["cpu_percent"]:
