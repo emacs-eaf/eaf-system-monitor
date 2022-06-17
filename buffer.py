@@ -52,7 +52,10 @@ class AppBuffer(BrowserBuffer):
 
         for proc in psutil.process_iter(['cpu_percent', 'memory_info', 'pid', 'name', 'username', 'cmdline']):
             info = proc.info
-            memory_number = info["memory_info"].rss
+            memory_info = info["memory_info"]
+            if memory_info is None:
+                continue
+            memory_number = memory_info.rss
             info["memory_number"] = memory_number
             info["memory"] = self.format_memory(memory_number)
             info["cmdline"] = " ".join(info["cmdline"])
