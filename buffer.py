@@ -20,12 +20,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from PyQt6.QtGui import QColor
-from PyQt6.QtCore import QUrl, QTimer
+from PyQt6.QtCore import QTimer
 from core.webengine import BrowserBuffer
-from core.utils import interactive
+from core.utils import interactive, get_emacs_theme_background, get_emacs_theme_foreground
 from functools import cmp_to_key
-import os
-import json
 import psutil
 
 class AppBuffer(BrowserBuffer):
@@ -38,7 +36,6 @@ class AppBuffer(BrowserBuffer):
 
     def init_app(self):
         self.buffer_widget.eval_js_function('''initProcesslistColor''', self.theme_background_color, self.theme_foreground_color)
-
         self.buffer_widget.eval_js_function('''initPanelColor''', self.panel_background_color, self.theme_foreground_color)
 
         self.update_process_info()
@@ -46,6 +43,14 @@ class AppBuffer(BrowserBuffer):
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_process_info)
         self.timer.start(1000)
+
+    @interactive
+    def update_theme(self):
+        self.theme_foreground_color = get_emacs_theme_foreground()
+        self.theme_background_color = get_emacs_theme_background()
+        self.panel_background_color = QColor(self.theme_background_color).darker(110).name()
+        self.buffer_widget.eval_js_function('''initProcesslistColor''', self.theme_background_color, self.theme_foreground_color)
+        self.buffer_widget.eval_js_function('''initPanelColor''', self.panel_background_color, self.theme_foreground_color)
 
     def update_process_info(self):
         infos = []
