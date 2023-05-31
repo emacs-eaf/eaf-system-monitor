@@ -22,7 +22,7 @@
 from PyQt6.QtGui import QColor
 from PyQt6.QtCore import QTimer
 from core.webengine import BrowserBuffer
-from core.utils import interactive, get_emacs_theme_background, get_emacs_theme_foreground
+from core.utils import *
 from functools import cmp_to_key
 import psutil
 
