@@ -19,12 +19,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from PyQt6.QtGui import QColor
-from PyQt6.QtCore import QTimer
-from core.webengine import BrowserBuffer
-from core.utils import *
 from functools import cmp_to_key
+
 import psutil
+from core.utils import *
+from core.webengine import BrowserBuffer
+from PyQt6.QtCore import QTimer
+from PyQt6.QtGui import QColor
+
 
 class AppBuffer(BrowserBuffer):
     def __init__(self, buffer_id, url, arguments):
