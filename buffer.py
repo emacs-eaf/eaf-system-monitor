@@ -115,5 +115,6 @@ class AppBuffer(BrowserBuffer):
             return "{:.1f}".format(memory / 1024) + "KB"
 
     def destroy_buffer(self):
-        self.close_buffer()
         self.timer.stop()
+
+        super().destroy_buffer()
