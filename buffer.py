@@ -53,6 +53,7 @@ class AppBuffer(BrowserBuffer):
         self.buffer_widget.eval_js_function('''initProcesslistColor''', self.theme_background_color, self.theme_foreground_color)
         self.buffer_widget.eval_js_function('''initPanelColor''', self.panel_background_color, self.theme_foreground_color)
 
+    @PostGui()
     def update_process_info(self):
         infos = []
 
