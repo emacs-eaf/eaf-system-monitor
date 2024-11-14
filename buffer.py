@@ -65,7 +65,7 @@ class AppBuffer(BrowserBuffer):
             memory_number = memory_info.rss
             info["memory_number"] = memory_number
             info["memory"] = self.format_memory(memory_number)
-            info["cmdline"] = " ".join(info["cmdline"])
+            info["cmdline"] = " ".join(info["cmdline"]) if info["cmdline"] is not None else ""
             infos.append(proc.info)
 
         infos.sort(key=cmp_to_key(self.process_compare), reverse=True)
