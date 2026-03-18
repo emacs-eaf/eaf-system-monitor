@@ -13,7 +13,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "apexcharts": "^3.27.3",
     "core-js": "^3.16.1",
-    "is-svg": "^4.4.0",
+    "is-svg": "^6.1.0",
     "vue": "^3.5.12",
     "vue-apexcharts": "^1.6.2",
     "vue-ellipse-progress": "^2.2.0",
